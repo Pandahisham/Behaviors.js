@@ -39,7 +39,6 @@
             if (counter.innerHTML === difference.toString()) { //text length did not change
                 return;
             }
-
             counter.setAttribute(this.overflowAttribute, overflow > 0);
             counter.innerHTML = difference;
         }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <style>
+        [mark-if-state="false"] {
+            display: none;
+        }
+
+        [mark-if-state="true"] {
+            display: visible;
+        }
+
+        #tip{
+            background-color: grey;
+            color: white;
+            padding: 3px;
+            margin-left: .5em;
+        }
+    </style>
+
+    <label for="charClass">Change class:</label>
+    <select id="charClass" name="charClass">
+        <option value="chanter">Chanter</option>
+        <option value="cipher">Cipher</option>
+        <option value="monk">Monk</option>
+    </select>
+
+    <p mark-if="[value=chanter]:checked">Chanter – essentially bard under a different name.</p>
+    <p mark-if="[value=cipher]:checked">Cipher – psionic who need to build up focus via physical attacks.</p>
+    <p mark-if="[value=monk]:checked">Monk – gets more abilities after absorbing damage.</p>
+
+    <hr />
+
+    <a id="target" href="">Mouse over this link</a>
+    <span id="tip" mark-if="#target:hover">→ This could be a helpful hint!</span>
+
+    <script type="text/javascript" src="../../src/mark-if.js"></script>
+</body>
+
+</html>

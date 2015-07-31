@@ -30,7 +30,7 @@ describe('characters-left ', function() { /*globals behaviors, makePage*/
 
         module.checkCounters();
 
-        expect(counter.getAttribute(module.overflowAttribute)).toBe("true");
+        expect(counter.getAttribute(module.overflowAttribute)).toBe('true');
         expect(counter.innerHTML).toBe('2');
     });
 

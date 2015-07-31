@@ -47,17 +47,17 @@
             form.setAttribute(this.registered, '');
         },
 
-        trackLastClickedButton: function trackLastClickedButton(form) { //because clicked button's value gets added to query
-            var self = this;
+        captureSubmitter: function captureSubmitter(event) {
+            this.submittingButton = event.target;
+        },
 
+        trackLastClickedButton: function trackLastClickedButton(form) { //because clicked button's value gets added to query
             function addButtonListener(button) {
-                button.addEventListener('click', function buttonListened(event) {
-                    self.submittingButton = event.target;
-                });
+                button.addEventListener('click', this.captureSubmitter.bind(this));
             }
 
             toArray(form.querySelectorAll('button[type=submit]'))
-                .forEach(addButtonListener);
+                .forEach(addButtonListener, this);
         },
 
         pageLoadHandler: function pageLoadHandler(targets, responseText) {
@@ -91,23 +91,23 @@
             this.loadPage(form.method, url, processPage);
         },
 
-        fieldFilter: function fieldFilter(field) {
-            if (field.type === 'checkbox') {
-                return field.checked;
-            } else if (field.tagName === 'BUTTON') {
-                return field === this.submittingButton;
-            }
-            return true;
+        acceptCheckable: function acceptCheckable(field) {
+            return field.type !== 'checkbox' && field.type !== 'radio' || field.checked;
+        },
+
+        acceptButtons: function acceptButtons(field) {
+            return field.tagName !== 'BUTTON' || field === this.submittingButton;
+        },
+
+        acceptField: function acceptField(field) {
+            return field.name && this.acceptCheckable(field) && this.acceptButtons(field);
         },
 
         serializeForm: function serializeForm(form) {
             return toArray(form.elements)
-                .filter(function hasName(field) {
-                    return !!field.name;
-                })
-                .filter(this.fieldFilter, this)
-                .map(function toString(e) {
-                    return e.name + '=' + encodeURIComponent(e.value);
+                .filter(this.acceptField, this)
+                .map(function toString(element) {
+                    return element.name + '=' + encodeURIComponent(element.value).replace(/%20/g, '+'); //replace significantly shortens natural language GET URLs
                 })
                 .join('&');
         },
@@ -115,17 +115,19 @@
         composeURL: function composeURL(url, queryString) {
             var urlElement = document.createElement('a');
             urlElement.href = url;
-            urlElement.search = queryString.replace(/%20/g, '+'); //replace significantly shortens natural language GET URLs
+            urlElement.search = queryString;
             return urlElement.href;
         },
 
         replaceWithTwin: function replaceWithTwin(pageWithReplacement, targetElement) {
             var twinElement = pageWithReplacement.querySelector('#' + targetElement.id);
-            targetElement.removeAttribute(this.loading); //for CSS
+            targetElement.removeAttribute(this.loading); //for CSS spinners
 
-            if (!twinElement) { return; }
+            if (!twinElement) {
+                return;
+            }
 
-            twinElement.setAttribute(this.loaded, true); //for CSS fade-in effects
+            twinElement.setAttribute(this.loaded, ''); //for CSS fade-in effects
             targetElement.parentNode.replaceChild(twinElement, targetElement); //also would work, but probably less efficient: targetElement.outerHTML = twinElement.outerHTML;
         },
 

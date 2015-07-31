@@ -26,3 +26,9 @@ function makePage(html) {
     newDocument.body.innerHTML = html;
     return newDocument;
 }
+
+function makeForm(html) {
+    var newDocument = document.implementation.createHTMLDocument('title');
+    newDocument.body.innerHTML = '<form>' + html + '</form>';
+    return  newDocument.body.querySelector('form');
+}

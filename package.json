@@ -5,9 +5,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/QuickenLoans/Behaviors.js.git"
   },
-  "version": "0.3.0",
+  "version": "0.5.1",
   "scripts": {
     "lint": "jshint src/ && eslint src/"
   },

@@ -41,19 +41,6 @@ describe('splice-into ', function() { /*globals behaviors, makePage, make, doNot
         expect(form.addEventListener).toHaveBeenCalledWith('submit', jasmine.any(Function));
     });
 
-    it('tracks last clicked button ', function() {
-        var form = make('<form>' +
-            '<button type="submit"></button> ' +
-            '</form>');
-        module.trackForm(form);
-        form.querySelector('button').click(); //simulates previous click
-
-        var button = form.querySelector('button');
-        button.click();
-
-        expect(module.submittingButton).toBe(button);
-    });
-
     it('sets loading attrs', function(){
         var page = makePage(
             '<form action="." method="post" splice-into="#target"></form>' +
@@ -101,27 +88,80 @@ describe('splice-into ', function() { /*globals behaviors, makePage, make, doNot
         expect(module.loadPage).toHaveBeenCalledWith('post', 'http://example.com/?x=y', jasmine.any(Function));
     });
 
-    it('serializes forms', function(){
-        var page = makePage(
-            '<form>'+
-            '<input name="text" value="a"/>' +
-            '<input type="CheckBox" name="kept-checkbox" value="b" checked/>' +
-            '<input type="CheckBox" name="skipped-checkbox" value="x"/>' +
-            '<select name="dropdown">'+
-                '<option value="x"><option>' +
-                '<option value="c" selected><option>' +
-            '</select>' +
-            '<textarea name="multiline">d</textarea>' +
-            '<button name="skipped-button" value="x"></button>'+
-            '<button name="submitting-button" value="e"></button>'+
-            '</form>'
+    it('serializes and concatenates named inputs', function(){
+        var form = makeForm(
+            '<input name="a" value="x"/>' +
+            '<input type="text" name="b" value="y"/>' +
+            '<input value="c" />'
         );
-        var form = page.querySelector('form');
-        module.submittingButton = page.querySelector('[name=submitting-button]');
 
         var result = module.serializeForm(form);
 
-        expect(result).toBe('text=a&kept-checkbox=b&dropdown=c&multiline=d&submitting-button=e');
+        expect(result).toBe('a=x&b=y');
+    });
+
+    it('serializes checked checkboxes', function(){
+        var form = makeForm(  //upper case in type is intentional
+            '<input type="CHECKBOX" name="checkbox1" value="a" />' +
+            '<input type="CHECKBOX" name="checkbox2" value="b" checked/>'
+        );
+
+        var result = module.serializeForm(form);
+
+        expect(result).toBe('checkbox2=b');
+    });
+
+    it('serializes radio button group', function(){
+        var form = makeForm( //upper case in type is intentional
+            '<input type="RADIO" name="x" value="a"/>' +
+            '<input type="RADIO" name="x" value="b" checked/>'
+        );
+
+        var result = module.serializeForm(form);
+
+        expect(result).toBe('x=b');
+    });
+
+    it('serializes dropdowns', function(){
+        var form = makeForm(
+            '<select name="dropdown">'+
+                '<option value="a"><option>' +
+                '<option value="b" selected><option>' +
+            '</select>'
+        );
+
+        var result = module.serializeForm(form);
+
+        expect(result).toBe('dropdown=b');
+    });
+
+    it('serializes text areas', function(){
+        var form = makeForm('<textarea name="multiline">a b\nc</textarea>');
+
+        var result = module.serializeForm(form);
+
+        expect(result).toBe('multiline=a+b%0Ac');
+    });
+
+    it('serializes hidden fields', function(){
+        var form = makeForm('<input type="HIDDEN" name="hiding" value="a" />'); //upper case in type is intentional
+
+        var result = module.serializeForm(form);
+
+        expect(result).toBe('hiding=a');
+    });
+
+    it('captures submitting button', function(){
+        var form = makeForm( //upper case in type is intentional
+            '<button type="SUBMIT" name="notSubmitter" value="a"></button>'+
+            '<button type="SUBMIT" name="submitter" value="b"></button>'
+        );
+        var button = form.querySelector('[name=submitter]');
+        module.captureSubmitter({target: button});
+
+        var result = module.serializeForm(form);
+
+        expect(result).toBe('submitter=b');
     });
 
     it('composes URLs semantically', function(){
