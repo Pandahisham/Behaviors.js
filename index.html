@@ -1,50 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <title>Behaviors.js by QuickenLoans</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <title>Behaviors.js by QuickenLoans</title>
   </head>
-
   <body>
-    <div id="container">
-      <div class="inner">
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Behaviors.js</h1>
+        <p class="header">JavaScript libraries that use HTML directives for progressive enhancement</p>
 
-        <header>
-          <h1>Behaviors.js</h1>
-          <h2>JavaScript library that uses HTML directives for progressive enhancement</h2>
-        </header>
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/QuickenLoans/Behaviors.js/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/QuickenLoans/Behaviors.js/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/QuickenLoans/Behaviors.js">View On GitHub</a></li>
+        </ul>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/QuickenLoans/Behaviors.js/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/QuickenLoans/Behaviors.js/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/QuickenLoans/Behaviors.js" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/QuickenLoans">QuickenLoans</a></p>
 
-        <hr>
 
-        <section id="main_content">
-          <h1>
-<a id="behaviorsjs" class="anchor" href="#behaviorsjs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Behaviors.JS</h1>
+      </header>
+      <section>
+        <p>These JavaScript libraries have no dependencies, so you just need to reference one to use it. Since they follow the principle of progressive enhancement they should fall back to vanilla HTML behavior on older browsers.</p>
 
-<p>JavaScript libraries that are configured by adding tags and attributes to HTML. The libraries follow the principle of progressive enhancement and have no external dependencies.</p>
-
-<p>Compatibility target: IE9+. Will fall back to default behavior on older browsers.</p>
+<p>Minimum system requirements: IE9+.</p>
 
 <h2>
-<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h2>
+<a id="splice-into" class="anchor" href="#splice-into" aria-hidden="true"><span class="octicon octicon-link"></span></a>splice-into</h2>
 
-<h3>
-<a id="splice-into" class="anchor" href="#splice-into" aria-hidden="true"><span class="octicon octicon-link"></span></a>splice-into</h3>
+<p>Allows you to submit forms via AJAX and then inserts new information into the current page. Since this library uses CSS selector to target elements, it can operate on several targets at once.</p>
 
-<p>Submits forms via AJAX and applies selected updates to the current page.</p>
+<p>To use it, add <code>splice-into="cssSelector"</code> to any HTML form. The CSS selector should target one or more elements on the current page. Those elements need to have IDs and will only be changed if the target page also has an element with matching ID.</p>
 
 <pre><code>&lt;form action="/whatever/page" splice-into="#placeholder"&gt;
 &lt;!-- ... --&gt;
@@ -55,30 +50,56 @@
 &lt;/div&gt;
 </code></pre>
 
-<h3>
-<a id="characters-left" class="anchor" href="#characters-left" aria-hidden="true"><span class="octicon octicon-link"></span></a>characters-left</h3>
+<p>Note: If you add <code>splice-into-ignore</code> attribute to a button, submitting via that button will trigger a normal request instead of AJAX.</p>
 
-<p>Counts characters remaining in a particular text field or textarea. Uses length from either max-length or data-val-length-max attributes on the target field.</p>
+<p>Second note: the library currently ignores enctype attribute on forms. Also, it does not yet support HTML5 form-related attributes such as formaction, formmethod and formtarget.</p>
 
-<pre><code>&lt;textarea id="field-id"&gt;&lt;/textarea&gt;
-&lt;characters-left in="field-id" /&gt;
+<p>Demos:</p>
+
+<ul>
+<li>Simplest example, <a href="./demos/splice-into/demo-1/index.html">single tag substitution</a>.</li>
+<li>
+<a href="./demos/splice-into/demo-2/index.html">Replacing submitted form</a>.</li>
+<li>
+<a href="./demos/splice-into/demo-3/index.html">Replacing multiple targets</a> and doing some animation.</li>
+<li>
+<a href="./demos/splice-into/demo-4/index.html">"Recursive" substitution</a>.</li>
+</ul>
+
+<h2>
+<a id="characters-left" class="anchor" href="#characters-left" aria-hidden="true"><span class="octicon octicon-link"></span></a>characters-left</h2>
+
+<p>Indicates to the user how many character they can type into a field before hitting <code>maxlength</code> or <code>data-val-length-max</code>.</p>
+
+<pre><code>&lt;input type="text" id="fieldId" maxlength="10" /&gt;
+&lt;characters-left in="fieldId" /&gt;
 </code></pre>
 
-<h3>
-<a id="include-on-proximity" class="anchor" href="#include-on-proximity" aria-hidden="true"><span class="octicon octicon-link"></span></a>include-on-proximity</h3>
+<p>When the script runs, <code>characters-left</code> element is filled with the number of characters left until overflow. It also receives <code>overflow</code> attribute, which is set to <code>"true"</code> or <code>"false"</code>.</p>
 
-<p>Infinite scroller. Inlines target of a link when you scroll close to the said link.</p>
+<p><a href="./demos/characters-left/index.html">Demo</a>.</p>
 
-<pre><code>&lt;div id="countainer-needs-id"&gt;
+<h2>
+<a id="include-on-proximity" class="anchor" href="#include-on-proximity" aria-hidden="true"><span class="octicon octicon-link"></span></a>include-on-proximity</h2>
+
+<p>Allows you to easily implement infinite scrolling. Works by inlining links to the next page.</p>
+
+<pre><code>&lt;div id="page"&gt;
     &lt;!-- page content... --&gt;
     &lt;a href="/page/2" include-on-proximity&gt;Next Page&lt;/a&gt;
 &lt;/div&gt;
 </code></pre>
 
-<p>Infinite scroller. Inlines target of a link when you scroll close to the said link.</p>
+<p>The script works by targeting the immediate parent element of the link and treating it as the container for appending data. In the above example the script will load <code>/page/2</code>, parse it, find an element with <code>id="page"</code>, get its content and replace "Next Page" link with that content. </p>
 
-<h3>
-<a id="mark-if" class="anchor" href="#mark-if" aria-hidden="true"><span class="octicon octicon-link"></span></a>mark-if</h3>
+<p>TLDR: you need a parent tag with consistent ids across all pages.</p>
+
+<p>Using the element with a value (<code>include-on-proximity="[pixels]"</code>) will change the default proximity, i.e. how close you need to get to the link before it triggers an AJAX request.</p>
+
+<p><a href="./demos/include-on-proximity/page1.html">Demo</a>.</p>
+
+<h2>
+<a id="mark-if" class="anchor" href="#mark-if" aria-hidden="true"><span class="octicon octicon-link"></span></a>mark-if</h2>
 
 <p>Puts <code>mark-if</code> attribute on the containing element. The attribute will have the value "true" as long as specified CSS selector matches something. It will contain "false" in the opposite case.</p>
 
@@ -91,23 +112,31 @@
 <pre><code>&lt;div mark-if="true" mark-if-if="[name=x]:checked"&gt;Some text.&lt;/div&gt;
 </code></pre>
 
-<h3>
-<a id="disable-if-empty" class="anchor" href="#disable-if-empty" aria-hidden="true"><span class="octicon octicon-link"></span></a>disable-if-empty</h3>
+<p><a href="./demos/mark-if/index.html">Demo</a>.</p>
+
+<h2>
+<a id="disable-if-empty" class="anchor" href="#disable-if-empty" aria-hidden="true"><span class="octicon octicon-link"></span></a>disable-if-empty</h2>
 
 <p>Disables the control it is applied to if any of the targeted inputs are empty.</p>
 
 <pre><code>&lt;input type="text" id="x" /&gt;
 &lt;button type="submit" disable-if-empty="#x"&gt;Go&lt;/button&gt;
 </code></pre>
-        </section>
 
-        <footer>
-          Behaviors.js is maintained by <a href="https://github.com/QuickenLoans">QuickenLoans</a><br>
-          This page was generated by <a href="https://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
+<p>Demos:</p>
 
-        
-      </div>
+<ul>
+<li>
+<a href="./demos/disable-if-empty/demo1.html">Single-field</a>.</li>
+<li>
+<a href="./demos/disable-if-empty/demo2.html">Multi-field</a>.</li>
+</ul>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
     </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
   </body>
 </html>
