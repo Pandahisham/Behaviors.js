@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+</head>
+
+<body>
+	<style>
+		textarea,
+		select,
+		label{
+			display: block;
+		}
+
+		label {
+			margin-top: 1em;
+		}
+	</style>
+
+	<label>Type and select: </label>
+
+	<select id="x">
+		<option></option>
+		<option>Type A</option>
+		<option>Type B</option>
+		<option>Type C</option>
+	</select>
+
+	<textarea id="y"></textarea>
+
+	<button disable-if-empty="#x,#y">Fake Submit</button>
+
+	<script type="text/javascript" src="../../src/disable-if-empty.js"></script>
+
+</body>
+
+</html>
