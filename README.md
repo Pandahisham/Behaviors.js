@@ -20,6 +20,14 @@ Submits forms via AJAX and applies selected updates to the current page.
     <!-- this will be updated when you submit the form -->
     </div>
 
+or:
+
+    <a href="/whatever/page" splice-into="#placeholder">link</a>
+
+    <div id="placeholder">
+    <!-- this will be updated when you click the link -->
+    </div>
+
 ###characters-left
 
 Counts characters remaining in a particular text field or textarea. Uses length from either max-length or data-val-length-max attributes on the target field.
