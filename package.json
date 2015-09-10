@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/QuickenLoans/Behaviors.js.git"
   },
-  "version": "0.5.1",
+  "version": "0.6.0",
   "scripts": {
     "lint": "jshint src/ && eslint src/"
   },

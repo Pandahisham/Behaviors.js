@@ -15,7 +15,7 @@
     ({
         name: name,
         registered: name + '-registered',
-        selector: 'form[' + name + ']:not([' + name + '-registered])',
+        selector: '[' + name + ']:not([' + name + '-registered])',
         loading: name + '-loading',
         loaded: name + '-loaded',
         disabledMarker: name + '-disabled',
@@ -28,23 +28,52 @@
             if (typeof $registerBehavior === 'function') {
                 $registerBehavior(this); //for testing and other clever things
             }
-            this.keepTicking();
+            this.run();
         },
 
-        keepTicking: function keepTicking() { //permanently bound to the module in init()
-            this.scanForms();
-            setTimeout(this.keepTicking.bind(this), this.pollRate);
+        run: function run() {
+            this.scanDocument();
+            setTimeout(this.run.bind(this), this.pollRate);
         },
 
-        scanForms: function scanForms() {
-            toArray(this.document.querySelectorAll(this.selector))
+        scanDocument: function scanDocument() {
+            toArray(this.document.querySelectorAll('form' + this.selector))
                 .forEach(this.trackForm, this);
+            toArray(this.document.querySelectorAll('a' + this.selector))
+                .forEach(this.trackLink, this);
+        },
+
+        trackLink: function trackLink(link) {
+            link.addEventListener('click', this.processLinkClick.bind(this));
+            link.setAttribute(this.registered, '');
+        },
+
+        processLinkClick: function processLinkClick(event) {
+            event.preventDefault();
+
+            var link = event.target,
+                targets = this.getTargetElements(link);
+            this.splice('GET', link.href, targets);
         },
 
         trackForm: function trackForm(form) {
             this.trackLastClickedButton(form);
             form.addEventListener('submit', this.processFormSubmit.bind(this));
             form.setAttribute(this.registered, '');
+        },
+
+        processFormSubmit: function processFormSubmit(event) {
+            if (!!this.submittingButton && this.submittingButton.hasAttribute(this.disabledMarker)) {
+                return; //normal form submit with no AJAX
+            }
+            event.preventDefault();
+
+            var form = event.target,
+                queryString = this.serializeForm(form),
+                url = this.composeURL(form.action, queryString),
+                targets = this.getTargetElements(form);
+
+            this.splice(form.method, url, targets);
         },
 
         captureSubmitter: function captureSubmitter(event) {
@@ -65,42 +94,25 @@
             targets.forEach(this.replaceWithTwin.bind(this, nextPage));
         },
 
-        getTargetElements: function getTargetElements(form) {
-            var selector = form.getAttribute(this.name);
+        getTargetElements: function getTargetElements(element) {
+            var selector = element.getAttribute(this.name);
             return toArray(this.document.querySelectorAll(selector));
         },
 
-        processFormSubmit: function processFormSubmit(event) {
-            if (!!this.submittingButton && this.submittingButton.hasAttribute(this.disabledMarker)) {
-                return; //normal form submit with no AJAX
-            }
-            event.preventDefault();
-            this.splice(event.target);
-        },
-
-        splice: function splice(form) {
-            var queryString = this.serializeForm(form),
-                url = this.composeURL(form.action, queryString),
-                targets = this.getTargetElements(form),
-                processPage = this.pageLoadHandler.bind(this, targets);
+        splice: function splice(method, url, targets) {
+            var processPage = this.pageLoadHandler.bind(this, targets);
 
             targets.forEach(function setLoading(target) {
                 target.setAttribute(this.loading, true);
             }, this);
 
-            this.loadPage(form.method, url, processPage);
-        },
-
-        acceptCheckable: function acceptCheckable(field) {
-            return field.type !== 'checkbox' && field.type !== 'radio' || field.checked;
-        },
-
-        acceptButtons: function acceptButtons(field) {
-            return field.tagName !== 'BUTTON' || field === this.submittingButton;
+            this.loadPage(method, url, processPage);
         },
 
         acceptField: function acceptField(field) {
-            return field.name && this.acceptCheckable(field) && this.acceptButtons(field);
+            return !!field.name && //skip nameless fields
+                (field.type !== 'checkbox' && field.type !== 'radio' || field.checked) && //skip unchecked readio buttons and checkboxes
+                (field.tagName !== 'BUTTON' || field === this.submittingButton); //only keep button value if it submitted the form
         },
 
         serializeForm: function serializeForm(form) {
