@@ -50,6 +50,15 @@
 &lt;/div&gt;
 </code></pre>
 
+<p>or:</p>
+
+<pre><code>&lt;a href="/whatever/page" splice-into="#placeholder"&gt;link&lt;/a&gt;
+
+&lt;div id="placeholder"&gt;
+&lt;!-- this will be updated when you click the link --&gt;
+&lt;/div&gt;
+</code></pre>
+
 <p>Note: If you add <code>splice-into-ignore</code> attribute to a button, submitting via that button will trigger a normal request instead of AJAX.</p>
 
 <p>Second note: the library currently ignores enctype attribute on forms. Also, it does not yet support HTML5 form-related attributes such as formaction, formmethod and formtarget.</p>
@@ -58,6 +67,8 @@
 
 <ul>
 <li>Simplest example, <a href="./demos/splice-into/demo-1/index.html">single tag substitution</a>.</li>
+<li>
+<a href="./demos/splice-into/demo-5/index.html">Using links</a>.</li>
 <li>
 <a href="./demos/splice-into/demo-2/index.html">Replacing submitted form</a>.</li>
 <li>
