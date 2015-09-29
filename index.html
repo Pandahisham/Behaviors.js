@@ -115,12 +115,12 @@
 <p>Puts <code>mark-if</code> attribute on the containing element. The attribute will have the value "true" as long as specified CSS selector matches something. It will contain "false" in the opposite case.</p>
 
 <pre><code>&lt;input type="checkbox" id="target"/&gt;
-&lt;div mark-if-if="#target:checked"&gt;Some Text&lt;/div&gt;
+&lt;div mark-if="#target:checked"&gt;Some Text&lt;/div&gt;
 </code></pre>
 
 <p>When <code>#target</code> is checked the DOM will look as follows:</p>
 
-<pre><code>&lt;div mark-if="true" mark-if-if="[name=x]:checked"&gt;Some text.&lt;/div&gt;
+<pre><code>&lt;div mark-if="true" mark-if="[name=x]:checked"&gt;Some text.&lt;/div&gt;
 </code></pre>
 
 <p><a href="./demos/mark-if/index.html">Demo</a>.</p>
