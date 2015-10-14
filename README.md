@@ -41,8 +41,6 @@ Infinite scroller. When the user scrolls close to the "next page" link the libra
         <a href="/page/2" include-on-proximity>Next Page</a>
     </div>
 
-Infinite scroller. Inlines target of a link when you scroll close to it.
-
 ##mark-if
 
 Library for conditional styling. It keeps track of whether a certain condition is met and sets an attribute on the current tag to either "true" or "false". The condition is expressed as a CSS query - it's true if the query matches at least one element.
