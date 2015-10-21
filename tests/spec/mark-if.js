@@ -13,7 +13,7 @@ describe('mark-if ', function() { /*globals behaviors, makePage*/
             '<div id="y"></div>'
         );
 
-        module.processAll();
+        module.scan();
 
         var activeElement = module.document.querySelector('#x');
         expect(activeElement.getAttribute('mark-if-state')).toBe('true');
@@ -22,7 +22,7 @@ describe('mark-if ', function() { /*globals behaviors, makePage*/
     it('has no false positives', function() {
         module.document = makePage('<div id="x" mark-if="#y"></div>');
 
-        module.processAll();
+        module.scan();
 
         var activeElement = module.document.querySelector('#x');
         expect(activeElement.getAttribute('mark-if-state')).toBe('false');

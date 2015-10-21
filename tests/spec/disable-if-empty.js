@@ -13,7 +13,7 @@ describe('disable-if-empty ', function() { /*globals behaviors, makePage*/
             '<button disable-if-empty="#x"></button>'
         );
 
-        module.processAll();
+        module.scan();
 
         var button = module.document.querySelector('button');
         expect(button.disabled).toBe(true);
@@ -25,7 +25,7 @@ describe('disable-if-empty ', function() { /*globals behaviors, makePage*/
             '<button disable-if-empty="#x"></button>'
         );
 
-        module.processAll();
+        module.scan();
 
         var button = module.document.querySelector('button');
         expect(button.disabled).toBe(false);
@@ -40,7 +40,7 @@ describe('disable-if-empty ', function() { /*globals behaviors, makePage*/
             '<button disable-if-empty="#x"></button>'
         );
 
-        module.processAll();
+        module.scan();
 
         var button = module.document.querySelector('button');
         expect(button.disabled).toBe(true);

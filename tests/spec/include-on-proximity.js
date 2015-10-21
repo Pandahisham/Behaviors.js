@@ -19,7 +19,7 @@ describe('include-on-proximity ', function() { /*globals behaviors, makePage, ma
         };
         module.includeLink = jasmine.createSpy('includeLinkFake');
 
-        module.checkForChanges();
+        module.scan();
 
         var target = module.document.querySelector('#yes');
         expect(module.includeLink).toHaveBeenCalledWith(target, 0, jasmine.any(Array));

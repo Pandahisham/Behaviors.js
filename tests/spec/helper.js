@@ -1,7 +1,7 @@
 var behaviors = {};
 
 function $registerBehavior(intercepted) {
-    intercepted.tick = doNothing; //stop module from running on a timer
+    intercepted.run = doNothing; //stop module from running on a timer
     behaviors[intercepted.name] = intercepted;
 }
 
@@ -32,3 +32,5 @@ function makeForm(html) {
     newDocument.body.innerHTML = '<form>' + html + '</form>';
     return  newDocument.body.querySelector('form');
 }
+
+var setTimeout = doNothing;

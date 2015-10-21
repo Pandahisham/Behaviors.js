@@ -10,18 +10,15 @@
             if (typeof $registerBehavior === 'function') {
                 $registerBehavior(this);
             }
-            this.run();
+            this.scan();
         },
 
-        run: function run(){
-            this.processAll();
-            setTimeout(run.bind(this), this.pollRate);
-        },
-
-        processAll: function processAll(){
+        scan: function scan(){
             Array.prototype.slice.call(
                 this.document.querySelectorAll('[' + this.name + ']')
             ).forEach(this.update, this);
+
+            setTimeout(scan.bind(this), this.pollRate);
         },
 
         update: function update(target) {

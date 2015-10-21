@@ -16,17 +16,14 @@
             if (typeof $registerBehavior === 'function') {
                 $registerBehavior(this); //for testing and other clever things
             }
-            this.keepTicking();
+            this.scan();
         },
 
-        keepTicking: function keepTicking() {
-            this.checkCounters();
-            setTimeout(keepTicking.bind(this), this.pollRate);
-        },
-
-        checkCounters: function checkCounters() {
+        scan: function scan() {
             Array.prototype.slice.call(this.document.querySelectorAll(this.name))
                 .forEach(this.updateCounter, this);
+
+            setTimeout(scan.bind(this), this.pollRate);
         },
 
         updateCounter: function updateCounter(counter) {

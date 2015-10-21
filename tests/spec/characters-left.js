@@ -15,7 +15,7 @@ describe('characters-left ', function() { /*globals behaviors, makePage*/
         module.document = page;
         var counter = page.querySelector('characters-left');
 
-        module.checkCounters();
+        module.scan();
 
         expect(counter.innerHTML).toBe('1');
     });
@@ -28,7 +28,7 @@ describe('characters-left ', function() { /*globals behaviors, makePage*/
         module.document = page;
         var counter = page.querySelector('characters-left');
 
-        module.checkCounters();
+        module.scan();
 
         expect(counter.getAttribute(module.overflowAttribute)).toBe('true');
         expect(counter.innerHTML).toBe('2');
@@ -42,7 +42,7 @@ describe('characters-left ', function() { /*globals behaviors, makePage*/
         module.document = page;
         var counter = page.querySelector('characters-left');
 
-        module.checkCounters();
+        module.scan();
 
         expect(counter.innerHTML).toBe('7');
     });

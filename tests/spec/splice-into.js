@@ -15,7 +15,7 @@ describe('splice-into ', function() { /*globals behaviors, makePage, make, doNot
         );
         module.trackForm = jasmine.createSpy('trackFormFake');
 
-        module.scanDocument();
+        module.scan();
 
         var target = module.document.querySelector('#targeted');
         expect(module.trackForm).toHaveBeenCalledWith(target, 0, jasmine.any(Array));
@@ -29,7 +29,7 @@ describe('splice-into ', function() { /*globals behaviors, makePage, make, doNot
         );
         module.trackLink = jasmine.createSpy('trackLinkFake');
 
-        module.scanDocument();
+        module.scan();
 
         var target = module.document.querySelector('#targeted');
         expect(module.trackLink).toHaveBeenCalledWith(target, 0, jasmine.any(Array));

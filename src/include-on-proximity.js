@@ -19,20 +19,17 @@
             if (typeof $registerBehavior === 'function') {
                 $registerBehavior(this); //for testing and other clever things
             }
-            this.keepTicking();
+            this.scan();
         },
 
-        keepTicking: function keepTicking() {
-            this.checkForChanges();
-            setTimeout(keepTicking.bind(this), this.pollRate);
-        },
-
-        checkForChanges: function checkForChanges() {
+        scan: function scan() {
             Array.prototype.slice.call(
                 this.document.querySelectorAll('[' + this.name + ']')
             )
             .filter(this.isCloseToVisibility, this)
             .forEach(this.includeLink, this);
+
+            setTimeout(scan.bind(this), this.pollRate);
         },
 
         getProximity: function getProximity(link) {

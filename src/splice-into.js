@@ -28,32 +28,16 @@
             if (typeof $registerBehavior === 'function') {
                 $registerBehavior(this); //for testing and other clever things
             }
-            this.run();
+            this.scan();
         },
 
-        run: function run() {
-            this.scanDocument();
-            setTimeout(this.run.bind(this), this.pollRate);
-        },
-
-        scanDocument: function scanDocument() {
+        scan: function scan() {
             toArray(this.document.querySelectorAll('form' + this.selector))
                 .forEach(this.trackForm, this);
             toArray(this.document.querySelectorAll('a' + this.selector))
                 .forEach(this.trackLink, this);
-        },
 
-        trackLink: function trackLink(link) {
-            link.addEventListener('click', this.processLinkClick.bind(this));
-            link.setAttribute(this.registered, '');
-        },
-
-        processLinkClick: function processLinkClick(event) {
-            event.preventDefault();
-
-            var link = event.target,
-                targets = this.getTargetElements(link);
-            this.splice('GET', link.href, targets);
+            setTimeout(scan.bind(this), this.pollRate);
         },
 
         trackForm: function trackForm(form) {
@@ -87,6 +71,19 @@
 
             toArray(form.querySelectorAll('button[type=submit]'))
                 .forEach(addButtonListener, this);
+        },
+
+        trackLink: function trackLink(link) {
+            link.addEventListener('click', this.processLinkClick.bind(this));
+            link.setAttribute(this.registered, '');
+        },
+
+        processLinkClick: function processLinkClick(event) {
+            event.preventDefault();
+
+            var link = event.target,
+                targets = this.getTargetElements(link);
+            this.splice('GET', link.href, targets);
         },
 
         pageLoadHandler: function pageLoadHandler(targets, responseText) {
