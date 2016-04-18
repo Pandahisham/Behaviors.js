@@ -1,3 +1,6 @@
+/** @summary: Disables the current field if other fields specified via CSS query are empty.
+    @example: <input name="x" /> <button type="submit" disable-if-empty="[name=x]">Save</button>
+    @description: Can target text areas, text fields and select fields. */
 (function disableIfEmptyIIFE() { /*global $registerBehavior*/
     'use strict';
 

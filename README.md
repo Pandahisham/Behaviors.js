@@ -41,6 +41,8 @@ Infinite scroller. When the user scrolls close to the "next page" link the libra
         <a href="/page/2" include-on-proximity>Next Page</a>
     </div>
 
+Infinite scroller. Inlines target of a link when you scroll close to it.
+
 ##mark-if
 
 Library for conditional styling. It keeps track of whether a certain condition is met and sets an attribute on the current tag to either "true" or "false". The condition is expressed as a CSS query - it's true if the query matches at least one element.
@@ -64,3 +66,14 @@ Disables the control if any of the specified inputs are empty.
 
     <input type="text" id="x" />
     <button type="submit" disable-if="#x">Go</button>
+
+##submit-on-change
+
+Submits the parent form of the input field if field's value is changed. The form needs to have a submit button for the script to work properly.
+
+    <form action="/some/page">
+        <input type="text" submit-on-change />
+        <button type="submit"></button>
+    </form>
+
+Optionally, you can specify poll rate as the value of the parameter (`submit-on-change="200"`).
