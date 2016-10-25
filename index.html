@@ -112,7 +112,7 @@
 <h2>
 <a id="mark-if" class="anchor" href="#mark-if" aria-hidden="true"><span class="octicon octicon-link"></span></a>mark-if</h2>
 
-<p>Puts <code>mark-if</code> attribute on the containing element. The attribute will have the value "true" as long as specified CSS selector matches something. It will contain "false" in the opposite case.</p>
+<p>Puts <code>mark-if-state</code> attribute on the containing element. The attribute will have the value "true" as long as specified CSS selector matches something. It will be set to "false" in the opposite case.</p>
 
 <pre><code>&lt;input type="checkbox" id="target"/&gt;
 &lt;div mark-if="#target:checked"&gt;Some Text&lt;/div&gt;
@@ -120,7 +120,7 @@
 
 <p>When <code>#target</code> is checked the DOM will look as follows:</p>
 
-<pre><code>&lt;div mark-if="true" mark-if="[name=x]:checked"&gt;Some text.&lt;/div&gt;
+<pre><code>&lt;div mark-if-state="true" mark-if="[name=x]:checked"&gt;Some text.&lt;/div&gt;
 </code></pre>
 
 <p><a href="./demos/mark-if/index.html">Demo</a>.</p>
