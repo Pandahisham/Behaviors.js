@@ -1,6 +1,6 @@
 /** @summary: Sets an attribute of the element if supplied CSS selector matches something.
-    @example: <a id="target" href="">hover over</a> <span mark-if-if="#target:hover">something</span>
-    // Span element will recieve `mark-if` attribute, which will be set to "true" when
+    @example: <a id="target" href="">hover over</a> <span mark-if="#target:hover">something</span>
+    // Span element will recieve `mark-if-state` attribute, which will be set to "true" when
     // user moves mouse pointer over the link. */
 (function setMarkerIIFE() { /*globals $registerBehavior*/
     'use strict';
