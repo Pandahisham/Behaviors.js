@@ -60,12 +60,12 @@ DOM values when `#target` is not checked:
 
     <div mark-if="#target:checked" mark-if-state="false">Some text.</div>
 
-##disable-if-empty
+##disable-if
 
-Disables the control if any of the specified inputs are empty.
+Disables the control if query matches anything.
 
-    <input type="text" id="x" />
-    <button type="submit" disable-if="#x">Go</button>
+    <input type="text" id="x" required />
+    <button type="submit" disable-if="#x:invalid">Go</button>
 
 ##submit-on-change
 

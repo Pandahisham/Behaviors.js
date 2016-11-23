@@ -123,7 +123,7 @@
 
         composeURL: function composeURL(url, queryString) {
             var urlElement = document.createElement('a');
-            urlElement.href = url;
+            urlElement.href = (url === '' ? document.URL : url); //the conditional is a workaround for IE bug
             urlElement.search = queryString;
             return urlElement.href;
         },

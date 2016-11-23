@@ -7,9 +7,16 @@
 
 <body>
 	<style>
+<<<<<<< HEAD
+
+		textarea,
+		select,
+		label {
+=======
 		textarea,
 		select,
 		label{
+>>>>>>> remaster
 			display: block;
 		}
 
@@ -18,20 +25,24 @@
 		}
 	</style>
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> remaster
 	<label>Type and select: </label>
 
-	<select id="x">
+	<select id="x" required>
 		<option></option>
 		<option>Type A</option>
 		<option>Type B</option>
 		<option>Type C</option>
 	</select>
 
-	<textarea id="y"></textarea>
+	<textarea id="y" required></textarea>
 
-	<button disable-if-empty="#x,#y">Fake Submit</button>
+	<button disable-if="#x:invalid,#y:invalid">Fake Submit</button>
 
-	<script type="text/javascript" src="../../src/disable-if-empty.js"></script>
+	<script type="text/javascript" src="../../src/disable-if.js"></script>
 
 </body>
 

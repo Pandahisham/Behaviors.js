@@ -19,11 +19,11 @@
 
 
 	<label>Type something: </label>
-	<input id="x" />
+	<input id="x" required/>
 
-    <button disable-if-empty="#x">Fake Submit</button>
+    <button disable-if="#x:invalid">Fake Submit</button>
 
-	<script type="text/javascript" src="../../src/disable-if-empty.js"></script>
+	<script type="text/javascript" src="../../src/disable-if.js"></script>
 
 </body>
 
