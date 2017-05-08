@@ -12,12 +12,12 @@
         name: 'include-on-proximity',
         pollRate: 100, //ms
         defaultProximity: 100, //px
-        window: window, //for unit testing
-        document: document, //for unit testing
+        window: window,
+        document: document, 
 
         init: function init() {
             if (typeof $registerBehavior === 'function') {
-                $registerBehavior(this); //for testing and other clever things
+                $registerBehavior(this);
             }
             this.scan();
         },

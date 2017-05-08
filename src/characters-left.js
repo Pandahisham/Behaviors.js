@@ -9,7 +9,7 @@
     ({
         name: 'characters-left',
         overflowAttribute: 'overflow',
-        pollRate: 50, //ms
+        pollRate: 100, //ms
         document: document, //for testing and other clever things
 
         init: function init() {

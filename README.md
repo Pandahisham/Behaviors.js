@@ -77,3 +77,8 @@ Submits the parent form of the input field if field's value is changed. The form
     </form>
 
 Optionally, you can specify poll rate as the value of the parameter (`submit-on-change="200"`).
+
+##toggle-on-click
+
+
+<div toggle-on-click>Content</div>

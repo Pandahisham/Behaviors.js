@@ -30,7 +30,7 @@
             var selector = target.getAttribute(this.name),
                 shouldBeDisabled = !!this.document.querySelector(selector);
 
-            if (shouldBeDisabled !== target.disabled) { //we don't want to update DOM unless necessary
+            if (shouldBeDisabled !== target.disabled) {
                 target.disabled = shouldBeDisabled;
             }
         }

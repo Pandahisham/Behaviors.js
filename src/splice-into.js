@@ -10,7 +10,7 @@
         return Array.prototype.slice.call(x);
     }
 
-    var name = 'splice-into'; //for reuse in object literal
+    var name = 'splice-into';
 
     ({
         name: name,
@@ -22,11 +22,11 @@
         pollRate: 100, //ms
 
         submittingButton: null,
-        document: document, //for unit testing
+        document: document,
 
         init: function init() {
             if (typeof $registerBehavior === 'function') {
-                $registerBehavior(this); //for testing and other clever things
+                $registerBehavior(this);
             }
             this.scan();
         },
