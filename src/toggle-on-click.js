@@ -1,5 +1,6 @@
 /** @summary: Adds and removes toggle-on-click-active attribute on click (similar to checkboxes).
     @example: <h2 toggle-on-click></h2> 
+    @description: Also adds toggle-on-click-loaded attribute to the root HTML tag when the library is initialized.*/
 (function toggleOnClickIIFE() { /* global document, $registerBehavior */
     'use strict';
 

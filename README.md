@@ -80,5 +80,6 @@ Optionally, you can specify poll rate as the value of the parameter (`submit-on-
 
 ##toggle-on-click
 
+Toggles `toggle-on-click-active` attribute when the element is clicked. Adds `toggle-on-click-loaded` to the root html element to allow progressive styling.
 
 <div toggle-on-click>Content</div>
